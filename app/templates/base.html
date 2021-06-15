@@ -23,6 +23,9 @@
                         <a href="{{url_for('registration')}}">registration</a>
                     </div>
                     {% else %}
+                    <div id="user_profile_button">
+                        <a href="{{url_for('user')}}">Profile</a>
+                    </div>
                     <div id="logout_button">
                         <a href="{{url_for('logout')}}">logout</a>
                     </div>
