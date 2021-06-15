@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash, request
 from werkzeug.urls import url_parse
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms import LoginForm, RegistrationForm
-from app import APP
+from app import APP, db
 from app.models import User
 
 @APP.route('/')
@@ -49,9 +49,16 @@ def logout():
 
 @APP.route("/registration", methods=['GET', 'POST'])
 def registration():
-    title = "LL - registration"
+    if current_user.is_autheticated:
+        return redirect(url_for('index'))
+
+    title = "registration"
     form = RegistrationForm()
     if form.validate_on_submit():
-        add_user(mongo, form.username.data, form.email.data, form.password.data)
-        # flash()
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Congratulations, you are now a registered user!')
+        return redirect(url_for('login'))
     return render_template("registration.html", title = title, form = form)
