@@ -1,11 +1,12 @@
 from flask import render_template, redirect, url_for, flash
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user, login_required
 from app.forms import LoginForm, RegistrationForm
 from app import APP
 from app.models import User
 
 @APP.route('/')
 @APP.route('/index')
+@login_required
 def index():
     user = {'nickname': 'Guest'}
     posts = [ # список выдуманных постов
