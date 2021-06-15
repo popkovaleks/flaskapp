@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, Length,EqualTo
+from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
+from app.models import User
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -9,8 +10,18 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[Length(min=4, max=26)])
-    email = StringField('E-mail', validators=[Length(min=6, max=40)])
-    password = PasswordField('Password', validators=[DataRequired(), Length(min=4), EqualTo('confirm_password', message='Passwords must match')])
-    confirm_password = PasswordField('Confirm Password', validators=[DataRequired()])
+    username = StringField('Username', validators=[Length(min=4, max=26), DataRequired()])
+    email = StringField('E-mail', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=4)])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password', message='Passwords must match')])
     submit = SubmitField('Sign Up')
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('This username is already in use.')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is not None:
+            raise ValidationError('This email is already in use.')
