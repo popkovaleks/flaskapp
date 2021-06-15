@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="static/style.css">
+    </head>
+    <body>
+        <div id="wrapper">
+            <header>
+                <div id="logo">
+                    LLearners
+                </div>
+                <div id="head_menu">
+                    <div id="head_menu_el">
+                        <a href="{{url_for('index')}}">home</a>
+                    </div>
+                    <div id="head_menu_el">
+                        lessons
+                    </div>
+                    <div id="head_menu_el">
+                        blog
+                    </div>
+                    <div id="head_menu_el">
+                        about
+                    </div>
+                    <div id="login_button">
+                        <a href="{{url_for('login')}}">login</a>
+                    </div>
+                    <div id="registration_button">
+                        <a href="{{url_for('registration')}}">registration</a>
+                    </div>
+                    <div id="search_form">
+                        <form>
+                            <input type="search" name="search-form" placeholder="Search">
+                            <input type="submit" value="Search">
+                        </form>
+                    </div>
+                </div>
+            </header>
+            <div id="main_field">
+                <hr>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                 </ul>
+                {% endif %}
+                {% endwith %}
+                {% block content%}{%endblock%}
+            </div>
+        </div>
+    </body>
+</html>

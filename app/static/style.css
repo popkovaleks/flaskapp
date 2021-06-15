@@ -1,0 +1,120 @@
+body {
+    height: 100%;
+    width: 100%;
+}
+#wrapper{
+    margin-left: 5%;
+    width: 90%;
+}
+header {
+    width: 100%;
+    height: 100px;
+    float: left;
+    border-bottom: 1px solid silver ;
+}
+
+header a:link{
+    color: #497DDD; 
+    
+    text-decoration-color: black; 
+}
+
+header a:link {
+    color: black; 
+    
+    text-decoration-color: black; 
+  }
+header a:visited {
+    color: black;
+  }
+
+header a:hover {
+    color: rgb(7, 80, 4); 
+    
+  }
+header a:active {
+    color: #056b27; 
+    
+  }
+
+
+#logo{
+    margin-left: 5%;
+    float: left;
+    width: 20%;
+    font-size: 40px;
+    font-family: cursive;
+}
+
+#head_menu{
+    margin-left: 5%;
+    margin-top: 35px;
+    float: left;
+    width: 60%;
+}
+
+#head_menu #head_menu_el{
+    float:left;
+    margin-left: 5%;
+    font-family: Helvetica;
+    font-weight: bold; 
+}
+
+h2{
+    float: left;
+    font-family: Helvetica;
+    font-weight: bold;
+}
+
+
+
+
+#login_button{
+    float: right;
+    margin-left: 5%;
+    font-family: Helvetica;
+    font-weight: bold; 
+}
+
+#registration_button{
+    float: right; 
+    margin-left: 5%;
+    font-family: Helvetica;
+    font-weight: bold;
+}
+
+#search_form{
+    float: right;
+    margin-left: 5%;
+}
+
+/*Login form*/
+#login_header{
+    width: 90%;
+    margin-left: 5%;
+}
+
+#login_form{
+    float: left;
+    margin-left: 5%;
+    width: 90%;
+    font-family: Helvetica;
+    font-weight: bold;
+}
+
+#username_form{
+    float: left;
+    width: 100%;
+}
+
+#username_form_label {
+    float: left;
+}
+
+#username_form_field{
+    float: left;
+    margin-left: 3%;
+    border-radius: 10px;
+    border: 1px solid green;
+}
+
