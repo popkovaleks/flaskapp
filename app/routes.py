@@ -49,7 +49,7 @@ def logout():
 
 @APP.route("/registration", methods=['GET', 'POST'])
 def registration():
-    if current_user.is_autheticated:
+    if current_user.is_authenticated:
         return redirect(url_for('index'))
 
     title = "registration"
