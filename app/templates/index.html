@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Welcome, {{user.nickname}}...</h2>
-<div class = "article">
-    <p>Welcome to our Language Learners Website</p>
-</div>
+<h2>Welcome, {{current_user.username}}...</h2>
+{% for post in posts %}
+    <div><p>{{ post.author.nickname }} says: <b>{{ post.body }}</b></p></div>
+{% endfor %}
 {% endblock%}
