@@ -24,7 +24,7 @@
                     </div>
                     {% else %}
                     <div id="user_profile_button">
-                        <a href="{{url_for('user')}}">Profile</a>
+                        <a href="{{url_for('user', username=current_user.username)}}">Profile</a>
                     </div>
                     <div id="logout_button">
                         <a href="{{url_for('logout')}}">logout</a>
