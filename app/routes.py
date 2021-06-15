@@ -9,7 +9,6 @@ from app.models import User
 @APP.route('/index')
 @login_required
 def index():
-    user = {'nickname': 'Guest'}
     posts = [ # список выдуманных постов
         { 
             'author': { 'nickname': 'John' }, 
@@ -23,7 +22,6 @@ def index():
 
     return render_template('index.html',
                             title='Home',
-                            user=user,
                             posts=posts)
 
 @APP.route('/login', methods=['GET', 'POST'])
