@@ -7,8 +7,8 @@ from app import APP, db
 from app.models import User, Post
 from datetime import datetime
 
-@APP.route('/')
-@APP.route('/index')
+@APP.route('/', methods=['GET', 'POST'])
+@APP.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
     posts = [ # список выдуманных постов
