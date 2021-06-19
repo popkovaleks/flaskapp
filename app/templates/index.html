@@ -1,7 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Welcome, {{current_user.username}}...</h2>
-{% for post in posts %}
-    <div><p>{{ post.author.nickname }} says: <b>{{ post.body }}</b></p></div>
+
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.post.label }}
+        {{ form.post(cols=32, rows=4) }}<br>
+        {% for error in form.post.errors %} 
+        <span style="color: red"> [{{ errror }}] </span>
+        {% endfor %} 
+    </p>
+    <p>
+        {{form.submit()}}
+    </p>
+</form>
+<!-- {% for post in posts %}
+    <div><p>{{ post.author.nickname }} says: <b>{{ post.body }}</b></p></div> -->
 {% endfor %}
 {% endblock%}
