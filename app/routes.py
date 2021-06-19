@@ -2,9 +2,9 @@ from flask import render_template, redirect, url_for, flash, request
 from flask_migrate import current
 from werkzeug.urls import url_parse
 from flask_login import current_user, login_user, logout_user, login_required
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, PostForm
 from app import APP, db
-from app.models import User
+from app.models import User, Post
 from datetime import datetime
 
 @APP.route('/')
@@ -21,7 +21,13 @@ def index():
             'body': 'The Avengers movie was so cool!' 
         }
     ]
-
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body = form.post.data, author = current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post is now live!')
+        return redirect(url_for('index'))
     return render_template('index.html',
                             title='Home',
                             posts=posts)
