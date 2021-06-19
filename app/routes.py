@@ -11,16 +11,7 @@ from datetime import datetime
 @APP.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    # posts = [ # список выдуманных постов
-    #     { 
-    #         'author': { 'nickname': 'John' }, 
-    #         'body': 'Beautiful day in Portland!' 
-    #     },
-    #     { 
-    #         'author': { 'nickname': 'Susan' }, 
-    #         'body': 'The Avengers movie was so cool!' 
-    #     }
-    # ]
+    
     form = PostForm()
     if form.validate_on_submit():
         post = Post(body = form.post.data, author = current_user)
@@ -28,7 +19,8 @@ def index():
         db.session.commit()
         flash('Your post is now live!')
         return redirect(url_for('index'))
-    posts = current_user.followed_posts().all()
+    page = request.args.get('page', 1, type=int) 
+    posts = current_user.followed_posts().paginate(page, APP.config['POSTS_PER_PAGE'], False)
     return render_template('index.html',
                             title='Home',
                             posts=posts, form=form)
@@ -144,5 +136,6 @@ def unfollow(username):
 @APP.route('/explore')
 @login_required
 def explore():
-    posts = Post.query.order_by(Post.timestamp.desc()).all()
-    return render_template('explore.html', title='Explore', posts=posts)
+    page = request.args.get('page', 1, type=int) 
+    posts = current_user.followed_posts().paginate(page, APP.config['POSTS_PER_PAGE'], False)
+    return render_template('index.html', title='Explore', posts=posts)
