@@ -11,16 +11,16 @@ from datetime import datetime
 @APP.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    posts = [ # список выдуманных постов
-        { 
-            'author': { 'nickname': 'John' }, 
-            'body': 'Beautiful day in Portland!' 
-        },
-        { 
-            'author': { 'nickname': 'Susan' }, 
-            'body': 'The Avengers movie was so cool!' 
-        }
-    ]
+    # posts = [ # список выдуманных постов
+    #     { 
+    #         'author': { 'nickname': 'John' }, 
+    #         'body': 'Beautiful day in Portland!' 
+    #     },
+    #     { 
+    #         'author': { 'nickname': 'Susan' }, 
+    #         'body': 'The Avengers movie was so cool!' 
+    #     }
+    # ]
     form = PostForm()
     if form.validate_on_submit():
         post = Post(body = form.post.data, author = current_user)
@@ -28,9 +28,10 @@ def index():
         db.session.commit()
         flash('Your post is now live!')
         return redirect(url_for('index'))
+    posts = current_user.followed_posts()
     return render_template('index.html',
                             title='Home',
-                            posts=posts)
+                            posts=posts, form=form)
 
 @APP.route('/login', methods=['GET', 'POST'])
 def login():
