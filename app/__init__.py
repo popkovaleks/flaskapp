@@ -30,7 +30,7 @@ if not APP.debug:
             secure = ()
         mail_handler = SMTPHandler(
             mailhost=(APP.config['MAIL_SERVER'], APP.config['MAIL_PORT']),
-            fromaddr='no-reply@' + app.config['MAIL_SERVER'],
+            fromaddr='no-reply@' + APP.config['MAIL_SERVER'],
             toaddrs=APP.config['ADMINS'], subject='Microblog Failure',
             credentials=auth, secure=secure)
         mail_handler.setLevel(logging.ERROR)
