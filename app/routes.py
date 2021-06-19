@@ -76,7 +76,7 @@ def user(username):
     prev_url = url_for('user', username=user.username, page=posts.prev_num) if posts.has_prev else None
     
     form = EmptyForm()
-    return render_template('user.html', user=user, posts=posts, form=form, next_url=next_url, prev_url=prev_url)
+    return render_template('user.html', user=user, posts=posts.items, form=form, next_url=next_url, prev_url=prev_url)
 
 @APP.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
