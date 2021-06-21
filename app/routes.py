@@ -149,7 +149,7 @@ def explore():
     return render_template('index.html', title='Explore', posts=posts.items, next_url=next_url, prev_url=prev_url)
 
 @APP.route('/reset_password_request', methods=['GET', 'POST'])
-def reset_password_requst():
+def reset_password_request():
     if current_user.is_authenticated():
         return redirect(url_for('index'))
 
