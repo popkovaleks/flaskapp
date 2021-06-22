@@ -1,63 +1,11 @@
-{%extends "base.html"%}
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {%block app_content%}
-<h2>Sign up</h2>
-<form action='' method="post" novalidate>
-    {{form.hidden_tag()}}
-    <div id="username_reg_form">
-        <div id='username_reg_form_label'>
-            {{form.username.label}}
-        </div> 
-        <div id='username_reg_form_field'>
-            {{form.username(size=32)}}
-        </div> 
-        <div id='username_reg_error'>
-            {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </div>
+<h1>Sign up</h1>
+<div class="row">
+    <div class="col-md-4">
+        {{ wtf.quick_form(form) }}
     </div>
-    <div id="email_reg_form">
-        <div id='email_reg_form_label'>
-            {{form.email.label}}
-        </div>
-        <div id='email_reg_form_field'>
-            {{form.email(size=32)}}
-        </div>
-        <div id='email_reg_error'>
-            {% for error in form.email.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </div>
-    </div>
-    <div id="password_reg_form">
-        <div id="password_reg_form_label">
-            {{form.password.label}}
-        </div>
-        <div id="password_reg_form_field">
-            {{form.password(size=32)}}
-        </div>
-        <div id='password_reg_error'>
-            {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </div>
-    </div>
-    <div id="password_confirm_reg_form">
-        <div id="password_confirm_reg_label">
-            {{form.confirm_password.label}}
-        </div>
-        <div id="password_confirm_reg_field">
-            {{form.confirm_password(size=32)}}
-        </div>
-        <div id="password_confirm_reg_error">
-            {% for error in form.confirm_password.errors %}
-            <span style='color: red;'>[{{ error }}]</span>
-            {% endfor %}
-        </div>
-        <div id="submit_registration">
-            {{form.submit()}}
-        </div>
-    </div>
-</form>
+</div>
 {%endblock%}
