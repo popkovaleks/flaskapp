@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 from logging.handlers import SMTPHandler, RotatingFileHandler
+from flask_bootstrap import Bootstrap
 
 import logging
 import os
@@ -17,6 +18,7 @@ migrate = Migrate(APP, db)
 login = LoginManager(APP)
 login.login_view = 'login'
 mail = Mail(APP)
+bootstrap = Bootstrap(APP)
 
 from app import routes, models, errors
 
