@@ -1,5 +1,9 @@
 {% extends 'bootstrap/base.html' %} 
 
+{% block scripts %} 
+    {{ super() }}
+    {{ moment.include_moment() }}
+
 {% block title %} 
     {% if title %} {{ title }} - Microblog {% else %} Microblog {% endif %} 
 {% endblock %} 

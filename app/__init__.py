@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask_bootstrap import Bootstrap
+from flask_moment import Moment
 
 import logging
 import os
@@ -19,6 +20,7 @@ login = LoginManager(APP)
 login.login_view = 'login'
 mail = Mail(APP)
 bootstrap = Bootstrap(APP)
+moment = Moment(APP)
 
 from app import routes, models, errors
 
