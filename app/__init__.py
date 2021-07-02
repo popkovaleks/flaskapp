@@ -8,6 +8,7 @@ from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_babel import Babel
+from flask_babel import lazy_gettext as _l
 
 import logging
 import os
@@ -19,6 +20,7 @@ db = SQLAlchemy(APP)
 migrate = Migrate(APP, db)
 login = LoginManager(APP)
 login.login_view = 'login'
+login.login_message = _l('Please log in to access this page.')
 mail = Mail(APP)
 bootstrap = Bootstrap(APP)
 moment = Moment(APP)

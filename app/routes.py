@@ -7,6 +7,7 @@ from app import APP, db
 from app.models import User, Post
 from datetime import datetime
 from app.email import send_password_reset_email
+from flask_babel import _
 
 @APP.route('/', methods=['GET', 'POST'])
 @APP.route('/index', methods=['GET', 'POST'])
@@ -18,7 +19,7 @@ def index():
         post = Post(body = form.post.data, author = current_user)
         db.session.add(post)
         db.session.commit()
-        flash('Your post is now live!')
+        flash(_('Your post is now live!'))
         return redirect(url_for('index'))
     page = request.args.get('page', 1, type=int) 
     posts = current_user.followed_posts().paginate(page, APP.config['POSTS_PER_PAGE'], False)
@@ -36,7 +37,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash(_('Invalid username or password'))
             return(redirect(url_for('login')))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
@@ -63,7 +64,7 @@ def registration():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
+        flash(_('Congratulations, you are now a registered user!'))
         return redirect(url_for('login'))
     return render_template("registration.html", title = title, form = form)
 
@@ -87,7 +88,7 @@ def edit_profile():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
         db.session.commit()
-        flash('Your changes have been saved.')
+        flash(_('Your changes have been saved.'))
         return redirect(url_for('edit_profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username
